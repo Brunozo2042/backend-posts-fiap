@@ -1,0 +1,126 @@
+import { Post } from "../models/post.model.js";
+
+/**
+ * GET /posts
+ * Lista todos os posts
+ */
+export const getAllPosts = async (req, res) => {
+    try {
+        const posts = await Post.find().sort({ _id: 1 });
+        res.json(posts);
+    } catch (err) {
+        res.status(500).json({
+            error: "Erro ao buscar posts",
+            details: err.message,
+        });
+    }
+};
+
+/**
+ * GET /posts/:id
+ * Retorna um post pelo ID
+ */
+export const getPostById = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({ error: "Post não encontrado" });
+        }
+        res.json(post);
+    } catch (err) {
+        res.status(500).json({
+            error: "Erro ao buscar post",
+            details: err.message,
+        });
+    }
+};
+
+/**
+ * POST /posts
+ * Cria uma nova postagem
+ */
+export const createPost = async (req, res) => {
+    const { title, content, author } = req.body;
+    if (!title || !content || !author) {
+        return res
+            .status(400)
+            .json({ error: "Título, conteúdo e autor são obrigatórios" });
+    }
+    try {
+        const newPost = await Post.create({ title, content, author });
+        res.status(201).json(newPost);
+    } catch (err) {
+        res.status(500).json({
+            error: "Erro ao criar post",
+            details: err.message,
+        });
+    }
+};
+
+/**
+ * PUT /posts/:id
+ * Atualiza uma postagem existente
+ */
+export const updatePost = async (req, res) => {
+    const { title, content, author } = req.body;
+    try {
+        const updated = await Post.findByIdAndUpdate(
+            req.params.id,
+            { $set: { title, content, author } },
+            { new: true, runValidators: true }
+        );
+        if (!updated) {
+            return res.status(404).json({ error: "Post não encontrado" });
+        }
+        res.json(updated);
+    } catch (err) {
+        res.status(500).json({
+            error: "Erro ao atualizar post",
+            details: err.message,
+        });
+    }
+};
+
+/**
+ * DELETE /posts/:id
+ * Remove uma postagem
+ */
+export const deletePost = async (req, res) => {
+    try {
+        const deleted = await Post.findByIdAndDelete(req.params.id);
+        if (!deleted) {
+            return res.status(404).json({ error: "Post não encontrado" });
+        }
+        res.json({ message: "Post removido com sucesso", post: deleted });
+    } catch (err) {
+        res.status(500).json({
+            error: "Erro ao remover post",
+            details: err.message,
+        });
+    }
+};
+
+/**
+ * GET /posts/search
+ * Busca posts por palavra-chave
+ */
+export const searchPosts = async (req, res) => {
+    const { q } = req.query;
+    if (!q) {
+        return res
+            .status(400)
+            .json({ error: 'Parâmetro de busca "q" é obrigatório' });
+    }
+    try {
+        const regex = new RegExp(q, "i");
+        const results = await Post.find({
+            $or: [{ title: regex }, { content: regex }],
+        });
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({
+            error: "Erro ao buscar posts",
+            details: err.message,
+        });
+    }
+};
