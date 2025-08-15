@@ -1,135 +1,52 @@
-# 📚 BackEnd de Blogging para Professores e Alunos
+# 🚀 Tech Challenge - Fase 2: Backend de Blog para Professores e Alunos
 
-## 📌 Sobre o Projeto
+Este projeto faz parte do desafio prático da Fase 2 do Tech Challenge FIAP.
 
-Este projeto foi desenvolvido como parte do **Tech Challenge - Fase 2**.  
-O objetivo é criar uma aplicação de blogging onde professores possam publicar conteúdos e alunos possam acessar e buscar postagens de forma prática e centralizada.
+## 🎯 Objetivo
+Desenvolver uma API RESTful para um sistema de blog, onde professores podem criar, editar e remover postagens, e alunos podem consultar e buscar conteúdos publicados.
 
-O sistema foi construído utilizando **Node.js** no back-end, com persistência em banco de dados, containerização com Docker e automação de testes via GitHub Actions.
-
----
-
-## 🚀 Funcionalidades
-
--   **Listar Postagens** (`GET /posts`)  
-    Lista todos os posts disponíveis na plataforma.
-
--   **Ler Postagem por ID** (`GET /posts/:id`)  
-    Retorna o conteúdo completo de um post específico.
-
--   **Criar Postagem** (`POST /posts`)  
-    Permite que professores criem novos posts.
-
--   **Editar Postagem** (`PUT /posts/:id`)  
-    Permite que professores editem posts existentes.
-
--   **Excluir Postagem** (`DELETE /posts/:id`)  
-    Permite que professores excluam posts.
-
--   **Buscar Postagem por Palavra-Chave** (`GET /posts/search?query=palavra`)  
-    Retorna posts que contenham o termo no título ou conteúdo.
-
----
+## ✨ Funcionalidades
+- Listar todos os posts
+- Buscar post por ID
+- Criar novo post
+- Editar post existente
+- Remover post
+- Buscar posts por palavra-chave (título ou conteúdo)
 
 ## 🛠️ Tecnologias Utilizadas
+- Node.js
+- Express
+- MongoDB (Mongoose)
+- Docker
+- GitHub Actions (CI/CD)
+- Jest e Supertest (testes)
 
--   [Node.js](https://nodejs.org/) — Ambiente de execução JavaScript
--   [Express](https://expressjs.com/) — Framework para criação de APIs
--   [MongoDB](https://www.mongodb.com/) — Banco de dados NoSQL
--   [Mongoose](https://mongoosejs.com/) — ODM para modelagem de dados
--   [Docker](https://www.docker.com/) — Containerização da aplicação
--   [GitHub Actions](https://docs.github.com/actions) — CI/CD para testes e deploy
--   [Jest](https://jestjs.io/) — Testes unitários
--   [Supertest](https://github.com/ladjs/supertest) — Testes de integração
+## 💻 Como rodar localmente
 
----
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/Brunozo2042/backend-posts-fiap
+    cd backend-posts-fiap
+    ```
+2. Instale as dependências:
+    ```bash
+    npm install
+    ```
+3. Suba o MongoDB com Docker Compose:
+    ```bash
+    docker-compose up -d mongo
+    ```
+4. Crie um arquivo `.env` na raiz:
+    ```env
+    PORT=3000
+    MONGO_URI=mongodb://localhost:27017/postsdb
+    ```
+5. Inicie o backend:
+    ```bash
+    npm run dev
+    ```
 
-## 📂 Estrutura de Pastas
-
-```
-📂 projeto-blog
-│
-├── 📂 src
-│   ├── 📂 config         # Configurações da aplicação
-│   ├── 📂 models         # Modelos de dados
-│   ├── 📂 controllers    # Lógica de negócio
-│   ├── 📂 routes         # Rotas da API
-│   ├── 📂 services       # Regras de negócio
-│   ├── 📂 middlewares    # Middlewares personalizados
-│   ├── 📂 tests          # Testes unitários e de integração
-│   ├── app.js            # Configuração do Express
-│   └── server.js         # Inicialização do servidor
-│
-├── 📂 docker             # Arquivos do Docker
-│
-├── .github/workflows     # Workflows do GitHub Actions
-├── .env                  # Variáveis de ambiente
-├── package.json
-└── README.md
-```
-
----
-
-## ⚙️ Configuração do Ambiente
-
-### 1️⃣ Clonar o repositório
-
-```bash
-git clone https://github.com/Brunozo2042/backend-posts-fiap
-cd backend-posts-fiap
-```
-
-### 2️⃣ Instalar dependências
-
-```bash
-npm install
-```
-
-### 3️⃣ Configurar variáveis de ambiente
-
-Crie um arquivo `.env` na raiz do projeto:
-
-```env
-PORT=3000
-MONGODB_URI=mongodb://localhost:27017/blog
-```
-
-### 4️⃣ Rodar a aplicação no modo desenvolvimento
-
-```bash
-npm run dev
-```
-
----
-
-## 🐳 Rodando com Docker
-
-### Build da imagem
-
-```bash
-docker build -t blog-app .
-```
-
-### Executar o container
-
-```bash
-docker run -p 3000:3000 blog-app
-```
-
----
-
-## 🧪 Executando os Testes
-
-Rodar todos os testes com cobertura:
-
-```bash
-npm test
-```
-
----
-
-## 📜 Endpoints
-
+## 🔗 Endpoints
 | Método | Endpoint                   | Descrição                     |
 | ------ | -------------------------- | ----------------------------- |
 | GET    | `/posts`                   | Lista todos os posts          |
@@ -137,17 +54,36 @@ npm test
 | POST   | `/posts`                   | Cria novo post                |
 | PUT    | `/posts/:id`               | Edita post existente          |
 | DELETE | `/posts/:id`               | Remove post                   |
-| GET    | `/posts/search?query=algo` | Busca posts por palavra-chave |
+| GET    | `/posts/search?q=algo`     | Busca posts por palavra-chave |
 
----
+## 🧪 Testes
+Execute todos os testes automatizados:
+```bash
+npm test
+```
 
-## 📄 Licença
+## ⚙️ CI/CD
+O projeto utiliza GitHub Actions para rodar testes automatizados a cada push ou pull request na branch main.
 
-Este projeto é de uso acadêmico para o Tech Challenge da FIAP.  
-Todos os direitos reservados aos autores.
+## 🗂️ Estrutura de Pastas
+```
+📦 src/
+ ┣ 📁 config/
+ ┣ 📁 controllers/
+ ┣ 📁 middlewares/
+ ┣ 📁 models/
+ ┣ 📁 routes/
+ ┣ 📁 services/
+ ┣ 📁 tests/
+ ┣ 📄 app.js
+ ┗ 📄 server.js
+📦 docker/
+📦 .github/workflows/
+📄 .env
+📄 package.json
+📄 README.md
+```
 
----
-
-## 👥 Autores
-
--   Bruno Henrique Miranda de Oliveira (RM365640)
+## 👤 Autor
+Bruno Henrique Miranda de Oliveira (RM365640)
+Projeto acadêmico — FIAP
