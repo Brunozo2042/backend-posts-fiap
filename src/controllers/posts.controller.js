@@ -112,12 +112,21 @@ export const searchPosts = async (req, res) => {
             .json({ error: 'Parâmetro de busca "q" é obrigatório' });
     }
     try {
-        const regex = new RegExp(q, "i");
+        // Protege contra regex inválido
+        let regex;
+        try {
+            regex = new RegExp(q, "i");
+        } catch (e) {
+            return res
+                .status(400)
+                .json({ error: "Expressão de busca inválida" });
+        }
         const results = await Post.find({
             $or: [{ title: regex }, { content: regex }],
         });
-        res.json(results);
+        res.json(results); // sempre retorna array, mesmo vazio
     } catch (err) {
+        console.error("Erro ao buscar posts:", err);
         res.status(500).json({
             error: "Erro ao buscar posts",
             details: err.message,

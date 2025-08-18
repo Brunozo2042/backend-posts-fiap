@@ -11,6 +11,12 @@ import {
 const router = Router();
 
 /**
+ * GET /posts/search
+ * Busca posts por palavra-chave
+ */
+router.get("/posts/search", searchPosts);
+
+/**
  * GET /posts
  * Lista todos os posts
  */
@@ -39,11 +45,5 @@ router.put("/posts/:id", updatePost);
  * Remove uma postagem
  */
 router.delete("/posts/:id", deletePost);
-
-/**
- * GET /posts/search
- * Busca posts por palavra-chave
- */
-router.get("/posts/search", searchPosts);
 
 export default router;
