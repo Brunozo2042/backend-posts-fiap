@@ -11,38 +11,132 @@ import {
 const router = Router();
 
 /**
- * GET /posts/search
- * Busca posts por palavra-chave
+ * @swagger
+ * /posts/search:
+ *   get:
+ *     summary: Busca posts por palavra-chave
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Palavra-chave para busca
+ *     responses:
+ *       200:
+ *         description: Lista de posts encontrados
  */
 router.get("/posts/search", searchPosts);
 
 /**
- * GET /posts
- * Lista todos os posts
+ * @swagger
+ * /posts:
+ *   get:
+ *     summary: Lista todos os posts
+ *     responses:
+ *       200:
+ *         description: Lista de posts
  */
 router.get("/posts", getAllPosts);
 
 /**
- * GET /posts/:id
- * Retorna um post específico pelo ID
+ * @swagger
+ * /posts/{id}:
+ *   get:
+ *     summary: Retorna um post por ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do post
+ *     responses:
+ *       200:
+ *         description: Post encontrado
+ *       404:
+ *         description: Post não encontrado
  */
 router.get("/posts/:id", getPostById);
 
 /**
- * POST /posts
- * Cria uma nova postagem
+ * @swagger
+ * /posts:
+ *   post:
+ *     summary: Cria um novo post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *               - content
+ *               - author
+ *             properties:
+ *               title:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *               author:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Post criado
  */
 router.post("/posts", createPost);
 
 /**
- * PUT /posts/:id
- * Atualiza uma postagem existente
+ * @swagger
+ * /posts/{id}:
+ *   put:
+ *     summary: Atualiza um post existente
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *               author:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Post atualizado
+ *       404:
+ *         description: Post não encontrado
  */
 router.put("/posts/:id", updatePost);
 
 /**
- * DELETE /posts/:id
- * Remove uma postagem
+ * @swagger
+ * /posts/{id}:
+ *   delete:
+ *     summary: Remove um post
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do post
+ *     responses:
+ *       200:
+ *         description: Post removido
+ *       404:
+ *         description: Post não encontrado
  */
 router.delete("/posts/:id", deletePost);
 

@@ -21,6 +21,19 @@ Desenvolver uma API RESTful para um sistema de blog, onde professores podem cria
 - GitHub Actions (CI/CD)
 - Jest e Supertest (testes)
 
+
+## 📖 Documentação Swagger
+
+Após iniciar o backend, acesse a documentação interativa da API em:
+
+```
+http://localhost:3000/api-docs
+```
+
+Você poderá visualizar, testar e explorar todos os endpoints da API diretamente pelo navegador.
+
+---
+
 ## 💻 Como rodar localmente
 
 1. Clone o repositório:
