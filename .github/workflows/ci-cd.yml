@@ -32,7 +32,7 @@ jobs:
             - name: Install dependencies
               run: npm install
 
-            # - name: Run tests
-            # env:
-            # MONGO_URI: mongodb://localhost:27017/postsdb
-            # run: npm test
+            - name: Run tests
+              env:
+                  MONGO_URI: mongodb://localhost:27017/postsdb
+              run: npm test
