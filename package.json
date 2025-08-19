@@ -5,7 +5,8 @@
     "type": "module",
     "scripts": {
         "dev": "docker-compose up -d mongo && nodemon src/server.js",
-        "test": "set NODE_OPTIONS=--experimental-vm-modules && jest"
+        "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+        "test:local": "docker-compose up -d mongo && NODE_OPTIONS=--experimental-vm-modules jest"
     },
     "keywords": [],
     "author": "",
