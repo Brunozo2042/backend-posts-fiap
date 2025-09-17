@@ -37,7 +37,7 @@ router.get("/posts/search", searchPosts);
  *       200:
  *         description: Lista de posts
  */
-router.get("/posts", getAllPosts);
+router.get("/post", getAllPosts);
 
 /**
  * @swagger
