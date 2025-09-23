@@ -99,4 +99,9 @@ O projeto utiliza GitHub Actions para rodar testes automatizados a cada push ou 
 
 ## 👤 Autor
 Bruno Henrique Miranda de Oliveira (RM365640)
+Gustavo Rosano Teixeira (RM366434)
+Janaina Yasmin De Paula Santos (RM366482)
+Ricardo Anderson Dos Santos Junior (RM366467)
+Tiago Antônio Borborema (RM365103)
+
 Projeto acadêmico — FIAP
