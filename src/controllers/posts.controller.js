@@ -16,6 +16,7 @@ export const getAllPosts = async (req, res) => {
     }
 };
 
+
 /**
  * GET /posts/:id
  * Retorna um post pelo ID
@@ -23,7 +24,7 @@ export const getAllPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
-        if (!post) {
+        if (!post){
             return res.status(404).json({ error: "Post não encontrado" });
         }
         res.json(post);
@@ -40,14 +41,14 @@ export const getPostById = async (req, res) => {
  * Cria uma nova postagem
  */
 export const createPost = async (req, res) => {
-    const { title, content, author } = req.body;
-    if (!title || !content || !author) {
+    const { title, content, author, userId, urlImage, createdAt, updatedAt } = req.body;
+    if (!title || !content || !author || !userId || !urlImage || !createdAt ) {
         return res
             .status(400)
             .json({ error: "Título, conteúdo e autor são obrigatórios" });
     }
     try {
-        const newPost = await Post.create({ title, content, author });
+        const newPost = await Post.create({ title, content, author, userId, urlImage, createdAt, updatedAt });
         res.status(201).json(newPost);
     } catch (err) {
         res.status(500).json({
