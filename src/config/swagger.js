@@ -10,4 +10,8 @@ export const swaggerSpec = swaggerJSDoc({
         },
     },
     apis: ["./src/routes/*.js"],
+    tags: [
+        { name: "Usuários", description: "Operações relacionadas a usuários" },
+        { name: "Posts", description: "Operações relacionadas a posts" },
+    ],
 });

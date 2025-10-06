@@ -8,12 +8,14 @@ import {
     searchPosts,
 } from "../controllers/posts.controller.js";
 
-const router = Router();
+const routerPosts = Router();
 
 /**
  * @swagger
  * /posts/search:
  *   get:
+ *     tags:
+ *      - Posts
  *     summary: Busca posts por palavra-chave
  *     parameters:
  *       - in: query
@@ -26,23 +28,27 @@ const router = Router();
  *       200:
  *         description: Lista de posts encontrados
  */
-router.get("/posts/search", searchPosts);
+routerPosts.get("/posts/search", searchPosts);
 
 /**
  * @swagger
  * /posts:
  *   get:
+ *     tags:
+ *      - Posts
  *     summary: Lista todos os posts
  *     responses:
  *       200:
  *         description: Lista de posts
  */
-router.get("/posts", getAllPosts);
+routerPosts.get("/posts", getAllPosts);
 
 /**
  * @swagger
  * /posts/{id}:
  *   get:
+ *     tags:
+ *      - Posts
  *     summary: Retorna um post por ID
  *     parameters:
  *       - in: path
@@ -57,12 +63,14 @@ router.get("/posts", getAllPosts);
  *       404:
  *         description: Post não encontrado
  */
-router.get("/posts/:id", getPostById);
+routerPosts.get("/posts/:id", getPostById);
 
 /**
  * @swagger
  * /posts:
  *   post:
+ *     tags:
+ *      - Posts
  *     summary: Cria um novo post
  *     requestBody:
  *       required: true
@@ -81,16 +89,22 @@ router.get("/posts/:id", getPostById);
  *                 type: string
  *               author:
  *                 type: string
+ *               userId:
+ *                 type: number
+ *               urlImage:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Post criado
  */
-router.post("/posts", createPost);
+routerPosts.post("/posts", createPost);
 
 /**
  * @swagger
  * /posts/{id}:
  *   put:
+ *     tags:
+ *      - Posts
  *     summary: Atualiza um post existente
  *     parameters:
  *       - in: path
@@ -118,12 +132,14 @@ router.post("/posts", createPost);
  *       404:
  *         description: Post não encontrado
  */
-router.put("/posts/:id", updatePost);
+routerPosts.put("/posts/:id", updatePost);
 
 /**
  * @swagger
  * /posts/{id}:
  *   delete:
+ *     tags:
+ *      - Posts
  *     summary: Remove um post
  *     parameters:
  *       - in: path
@@ -138,6 +154,6 @@ router.put("/posts/:id", updatePost);
  *       404:
  *         description: Post não encontrado
  */
-router.delete("/posts/:id", deletePost);
+routerPosts.delete("/posts/:id", deletePost);
 
-export default router;
+export default routerPosts;

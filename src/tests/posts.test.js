@@ -1,7 +1,6 @@
 import request from "supertest";
 import mongoose from "mongoose";
 import { app } from "../app.js"; // Certifique-se de exportar o app em app.js
-import { Post } from "../models/post.model.js";
 
 const MONGO_TEST_URI =
     process.env.MONGO_TEST_URI || "mongodb://localhost:27017/postsdb_test";
@@ -22,9 +21,13 @@ describe("Posts API", () => {
     let postId;
 
     it("deve criar um novo post", async () => {
-        const res = await request(app)
-            .post("/posts")
-            .send({ title: "Teste", content: "Conteúdo", author: "Autor" });
+        const res = await request(app).post("/posts").send({
+            title: "Teste",
+            content: "Conteúdo",
+            author: "Autor",
+            userId: 1,
+            urlImage: "http://image.url",
+        });
         expect(res.statusCode).toBe(201);
         expect(res.body).toHaveProperty("_id");
         postId = res.body._id;
@@ -52,23 +55,33 @@ describe("Posts API", () => {
 
     it("deve buscar posts por palavra-chave", async () => {
         // Cria e atualiza um post antes, se necessário
-        const post = await request(app)
-            .post("/posts")
-            .send({ title: "Teste", content: "Conteúdo", author: "Autor" });
+        const post = await request(app).post("/posts").send({
+            title: "Palavra-chave",
+            content: "Conteúdo",
+            author: "Autor",
+            userId: 1,
+            urlImage: "http://image.url",
+        });
 
-        await request(app)
-            .put(`/posts/${post.body._id}`)
-            .send({ title: "Atualizado" });
-
-        const res = await request(app).get("/posts/search?q=Atualizado");
+        const res = await request(app).get("/posts/search?q=Palavra-chave");
         expect(res.statusCode).toBe(200);
         expect(Array.isArray(res.body)).toBe(true);
         expect(res.body.length).toBeGreaterThan(0);
-        expect(res.body[0].title).toBe("Atualizado");
+        expect(res.body[0].title).toBe("Palavra-chave");
     });
 
     it("deve remover um post", async () => {
-        const res = await request(app).delete(`/posts/${postId}`);
+        // Cria um post só para este teste
+        const post = await request(app).post("/posts").send({
+            title: "Para Remover",
+            content: "Conteúdo",
+            author: "Autor",
+            userId: 1,
+            urlImage: "http://image.url",
+        });
+        const idParaRemover = post.body._id;
+
+        const res = await request(app).delete(`/posts/${idParaRemover}`);
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty("message");
     });
