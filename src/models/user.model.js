@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true, select: false},
     email: {type: String, required: true},
     mobilePhone : {type: Number, required: false},
-    createdAt: {type: Date, required: true},
     isActive: {type: String, required: true}
     },
     { timestamps: true }

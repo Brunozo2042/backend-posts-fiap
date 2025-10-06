@@ -7,8 +7,6 @@ const postSchema = new mongoose.Schema(
         author: { type: String, required: true },
         userId: {type: String, required: true},
         urlImage: {type: String, required: true},
-        createdAt: {type: Date, required: false},
-        updatedAt: {type: Date, required: false}
     },
     { timestamps: true }
 );

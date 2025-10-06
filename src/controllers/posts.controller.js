@@ -41,11 +41,11 @@ export const getPostById = async (req, res) => {
  * Cria uma nova postagem
  */
 export const createPost = async (req, res) => {
-    const { title, content, author, userId, urlImage, createdAt, updatedAt } = req.body;
-    if (!title || !content || !author || !userId || !urlImage || !createdAt ) {
+    const { title, content, author, userId, urlImage} = req.body;
+    if (!title || !content || !author || !userId || !urlImage ) {
         return res
             .status(400)
-            .json({ error: "Título, conteúdo e autor são obrigatórios" });
+            .json({ error: "Título, conteúdo, autor, usuário e url da imagem, são obrigatórios" });
     }
     try {
         const newPost = await Post.create({ title, content, author, userId, urlImage, createdAt, updatedAt });
