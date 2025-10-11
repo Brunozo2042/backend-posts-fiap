@@ -34,6 +34,12 @@ routerPosts.get("/posts/search", searchPosts);
  * @swagger
  * /posts:
  *   get:
+ *     parameters:
+ *      - in: query
+ *        name: role
+ *        schema:
+ *          type: string
+ *        required: false
  *     tags:
  *      - Posts
  *     summary: Lista todos os posts
@@ -93,6 +99,10 @@ routerPosts.get("/posts/:id", getPostById);
  *                 type: number
  *               urlImage:
  *                 type: string
+ *               posted:
+ *                 type: boolean
+ *               excluded:
+ *                 type: boolean
  *     responses:
  *       201:
  *         description: Post criado

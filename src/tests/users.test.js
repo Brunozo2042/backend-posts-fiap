@@ -27,10 +27,12 @@ describe("Users API", () => {
             password: "senha123",
             email: "teste@email.com",
             isActive: true,
+            role: "aluno",
+            mobilePhone: "1234567890",
         });
         expect(res.statusCode).toBe(201);
-        expect(res.body.newUser).toHaveProperty("_id");
-        userId = res.body.newUser._id;
+        expect(res.body).toHaveProperty("_id");
+        userId = res.body._id;
     });
 
     it("deve listar todos os usuários", async () => {
@@ -63,7 +65,19 @@ describe("Users API", () => {
     // });
 
     it("deve remover um usuário", async () => {
-        const res = await request(app).delete(`/users/${userId}`);
+        // Cria um user só para este teste
+        const post = await request(app).post("/users").send({
+            name: "Usuário Teste",
+            username: "usuarioteste",
+            password: "senha123",
+            email: "teste@email.com",
+            isActive: true,
+            role: "aluno",
+            mobilePhone: "1234567890",
+        });
+        const idParaRemover = post.body._id;
+
+        const res = await request(app).delete(`/users/${idParaRemover}`);
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty("messsage");
     });

@@ -42,9 +42,18 @@ export const getUserById = async (req, res) => {
  * Cria um novo User
  */
 export const createUser = async (req, res) => {
-    const { name, username, password, role, email, isActive } = req.body;
+    const { name, username, password, email, isActive, role, mobilePhone } =
+        req.body;
 
-    if (!name || !username || !password || !email || !isActive) {
+    if (
+        !name ||
+        !username ||
+        !password ||
+        !email ||
+        !isActive ||
+        !role ||
+        !mobilePhone
+    ) {
         return res.status(400).json({
             error: `Os valores: name, username, password, email, isActive, 
             São obrigatórios!`,
@@ -57,8 +66,10 @@ export const createUser = async (req, res) => {
             password,
             email,
             isActive,
+            role,
+            mobilePhone,
         });
-        res.status(201).json({ newUser });
+        res.status(201).json(newUser);
     } catch (err) {
         res.status(500).json({
             error: "Erro ao criar user",

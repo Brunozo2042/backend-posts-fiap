@@ -4,10 +4,10 @@ import bcrypt from "bcryptjs";
 const userSchema = new mongoose.Schema(
     {
         name: { type: String, required: true },
-        email: { type: String, required: true, unique: true },
-        password: { type: String, required: true },
         email: { type: String, required: true },
+        password: { type: String, required: true },
         mobilePhone: { type: Number, required: false },
+        isActive: { type: Boolean, default: true },
         role: {
             type: String,
             enum: ["professor", "aluno", "administrador"], // papéis fixos

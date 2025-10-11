@@ -203,6 +203,7 @@ routerUsers.delete("/users/:id", deleteUser);
  *         - password
  *         - email
  *         - isActive
+ *         - role
  *       properties:
  *         name:
  *           type: string
@@ -214,6 +215,11 @@ routerUsers.delete("/users/:id", deleteUser);
  *           type: string
  *         isActive:
  *           type: boolean
+ *         role:
+ *           type: string
+ *           enum: [professor, aluno, administrador]
+ *         mobilePhone:
+ *           type: string
  *     UserUpdate:
  *       type: object
  *       properties:

@@ -27,6 +27,8 @@ describe("Posts API", () => {
             author: "Autor",
             userId: 1,
             urlImage: "http://image.url",
+            posted: true,
+            excluded: false,
         });
         expect(res.statusCode).toBe(201);
         expect(res.body).toHaveProperty("_id");
@@ -61,6 +63,8 @@ describe("Posts API", () => {
             author: "Autor",
             userId: 1,
             urlImage: "http://image.url",
+            posted: true,
+            excluded: false,
         });
 
         const res = await request(app).get("/posts/search?q=Palavra-chave");
@@ -78,6 +82,8 @@ describe("Posts API", () => {
             author: "Autor",
             userId: 1,
             urlImage: "http://image.url",
+            posted: true,
+            excluded: false,
         });
         const idParaRemover = post.body._id;
 

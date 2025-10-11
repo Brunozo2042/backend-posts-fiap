@@ -5,8 +5,16 @@ import { Post } from "../models/post.model.js";
  * Lista todos os posts
  */
 export const getAllPosts = async (req, res) => {
+    const role = req.query.role;
     try {
-        const posts = await Post.find().sort({ _id: 1 });
+        let filter = {};
+        if (role === "aluno") {
+            filter.posted = true;
+        }
+        if (role === "aluno" || role === "professor") {
+            filter.excluded = false;
+        }
+        const posts = await Post.find(filter).sort({ _id: 1 });
         res.json(posts);
     } catch (err) {
         res.status(500).json({
@@ -40,8 +48,18 @@ export const getPostById = async (req, res) => {
  * Cria uma nova postagem
  */
 export const createPost = async (req, res) => {
-    const { title, content, author, userId, urlImage } = req.body;
-    if (!title || !content || !author || !userId || !urlImage) {
+    const { title, content, author, userId, urlImage, posted, excluded } =
+        req.body;
+
+    if (
+        !title ||
+        !content ||
+        !author ||
+        !userId ||
+        !urlImage ||
+        posted === undefined ||
+        excluded === undefined
+    ) {
         return res.status(400).json({
             error: "Título, conteúdo, autor, usuário e url da imagem, são obrigatórios",
         });
@@ -53,6 +71,8 @@ export const createPost = async (req, res) => {
             author,
             userId,
             urlImage,
+            posted,
+            excluded,
         });
         res.status(201).json(newPost);
     } catch (err) {
@@ -93,7 +113,11 @@ export const updatePost = async (req, res) => {
  */
 export const deletePost = async (req, res) => {
     try {
-        const deleted = await Post.findByIdAndDelete(req.params.id);
+        const deleted = await Post.findByIdAndUpdate(
+            req.params.id,
+            { $set: { excluded: true } },
+            { new: true, runValidators: true }
+        );
         if (!deleted) {
             return res.status(404).json({ error: "Post não encontrado" });
         }
