@@ -3,24 +3,26 @@
 Este projeto faz parte do desafio prático da Fase 2 do Tech Challenge FIAP.
 
 ## 🎯 Objetivo
+
 Desenvolver uma API RESTful para um sistema de blog, onde professores podem criar, editar e remover postagens, e alunos podem consultar e buscar conteúdos publicados.
 
 ## ✨ Funcionalidades
-- Listar todos os posts
-- Buscar post por ID
-- Criar novo post
-- Editar post existente
-- Remover post
-- Buscar posts por palavra-chave (título ou conteúdo)
+
+-   Listar todos os posts
+-   Buscar post por ID
+-   Criar novo post
+-   Editar post existente
+-   Remover post
+-   Buscar posts por palavra-chave (título ou conteúdo)
 
 ## 🛠️ Tecnologias Utilizadas
-- Node.js
-- Express
-- MongoDB (Mongoose)
-- Docker
-- GitHub Actions (CI/CD)
-- Jest e Supertest (testes)
 
+-   Node.js
+-   Express
+-   MongoDB (Mongoose)
+-   Docker
+-   GitHub Actions (CI/CD)
+-   Jest e Supertest (testes)
 
 ## 📖 Documentação Swagger
 
@@ -60,25 +62,51 @@ Você poderá visualizar, testar e explorar todos os endpoints da API diretament
     ```
 
 ## 🔗 Endpoints
-| Método | Endpoint                   | Descrição                     |
-| ------ | -------------------------- | ----------------------------- |
-| GET    | `/posts`                   | Lista todos os posts          |
-| GET    | `/posts/:id`               | Retorna post por ID           |
-| POST   | `/posts`                   | Cria novo post                |
-| PUT    | `/posts/:id`               | Edita post existente          |
-| DELETE | `/posts/:id`               | Remove post                   |
-| GET    | `/posts/search?q=algo`     | Busca posts por palavra-chave |
+
+### 📚 Posts
+
+| Método | Endpoint               | Descrição                     |
+| ------ | ---------------------- | ----------------------------- |
+| GET    | `/posts`               | Lista todos os posts          |
+| GET    | `/posts/:id`           | Retorna post por ID           |
+| POST   | `/posts`               | Cria novo post                |
+| PUT    | `/posts/:id`           | Edita post existente          |
+| DELETE | `/posts/:id`           | Remove post                   |
+| GET    | `/posts/search?q=algo` | Busca posts por palavra-chave |
+
+### 👤 Usuários
+
+| Método | Endpoint     | Descrição               |
+| ------ | ------------ | ----------------------- |
+| GET    | `/users/`    | Lista todos os usuários |
+| GET    | `/users/:id` | Retorna usuário por ID  |
+| POST   | `/users`     | Cria novo usuário       |
+| PUT    | `/users/:id` | Edita usuário existente |
+| DELETE | `/users/:id` | Remove usuário          |
+
+## 🔒 Medidas de Segurança
+
+-   Validação de dados obrigatórios em todas as rotas de criação e atualização (campos obrigatórios, tipos e formatos).
+-   Filtros de acesso por perfil (ex: alunos só visualizam posts publicados e não excluídos).
+-   Soft delete: posts não são removidos do banco, apenas marcados como `excluded`.
+-   Tratamento de erros centralizado, retornando mensagens claras e status HTTP adequados.
+-   Testes automatizados para garantir integridade das regras de negócio e segurança das rotas.
+-   Documentação Swagger para facilitar o uso correto da API e evitar uso indevido dos endpoints.
 
 ## 🧪 Testes
+
 Execute todos os testes automatizados:
+
 ```bash
 npm test
 ```
 
 ## ⚙️ CI/CD
+
 O projeto utiliza GitHub Actions para rodar testes automatizados a cada push ou pull request na branch main.
 
 ## 🗂️ Estrutura de Pastas
+
 ```
 📦 src/
  ┣ 📁 config/
@@ -98,5 +126,9 @@ O projeto utiliza GitHub Actions para rodar testes automatizados a cada push ou 
 ```
 
 ## 👤 Autor
-Bruno Henrique Miranda de Oliveira (RM365640)
-Projeto acadêmico — FIAP
+
+-   Bruno Henrique Miranda de Oliveira (RM365640)
+-   Gustavo Rosano Teixeira (RM366434)
+-   Janaina Yasmin De Paula Santos (RM366482)
+-   Ricardo Anderson Dos Santos Junior (RM366467)
+-   Tiago Antônio Borborema (RM365103)
