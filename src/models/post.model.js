@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema(
         title: { type: String, required: true },
         content: { type: String, required: true },
         author: { type: String, required: true },
-        userId: { type: Number, required: true },
+        userId: { type: String, required: true },
         urlImage: { type: String, required: true },
         posted: { type: Boolean, required: true },
         excluded: { type: Boolean, required: true },

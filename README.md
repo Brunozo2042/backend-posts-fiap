@@ -29,7 +29,7 @@ Desenvolver uma API RESTful para um sistema de blog, onde professores podem cria
 Após iniciar o backend, acesse a documentação interativa da API em:
 
 ```
-http://localhost:3000/api-docs
+http://localhost:3030/api-docs
 ```
 
 Você poderá visualizar, testar e explorar todos os endpoints da API diretamente pelo navegador.
